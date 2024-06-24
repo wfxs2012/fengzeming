@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+		<title>瀑布流_懒加载_固定宽度</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+
+	<body>
+		<div id="js-box" class="waterfall-box">
+			<ul class="list-box">
+				<!--动态加载-->
+			</ul>
+			<div class="load hide">
+				正在加载
+			</div>
+		</div>
+		<script src="../../../full/5sing/static/js/libs/jquery/jquery/1.12.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../resource/js/class.js" ></script>
+		<script src="index.js"></script>
+		<script type="text/javascript">
+			var curPage = 1,
+				perPageCount = 20;
+			var wf = new WaterFall({
+				boxEl: '#js-box',
+				itemW: 236,
+				distW: 16,
+				handler: function() {
+					var self = this;
+					getData(function(data) {
+						self.start(renderData(data));
+					});
+				}
+			});
+
+			function getData(callBack) {
+				$.ajax({
+					url: 'https://v1.alapi.cn/api/new/toutiao?start=1&num=100',
+					type: 'get',
+					 dataType:'json',
+					data: {
+						// app_key: '1271687855',
+						// format: 'json',
+						// size: 'img',
+						// num: perPageCount,
+						// page: curPage
+					},
+					success: function(ret) {
+						if (ret.code == 200) {
+							callBack(ret.data);
+							curPage++;
+						}
+					}
+				})
+			}
+			function renderData(items) {
+				var tpl = '',
+					$nodes;
+				for (var i = 0; i < items.length; i++) {
+					tpl += '<li class="item">';
+					tpl += ' <a href="#" class="link"><img src="' + items[i].imgsrc + '" alt=""></a>';
+					tpl += ' <h4 class="header">' + items[i].title + '</h4>';
+					tpl += '<p class="desp">' + items[i].source + '</p>';
+					tpl += '</li>';
+				}
+				$nodes = $(tpl);
+				return $nodes;
+			}
+		</script>
+
+	</body>
+
+</html>
