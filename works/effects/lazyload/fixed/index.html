@@ -36,10 +36,15 @@
 			});
 
 			function getData(callBack) {
+				//MfXR8cWWbk6XZAWhcTB6mTW0brJcmWsefQSgffYLDQkxHBT2gUT9wGoo
 				$.ajax({
-					url: 'https://v1.alapi.cn/api/new/toutiao?start=1&num=100',
+					//url: 'https://v1.alapi.cn/api/new/toutiao?start=1&num=100',
+					url:'https://api.pexels.com/v1/curated?page=1&per_page=50'
 					type: 'get',
 					 dataType:'json',
+					  headers: {
+   						 "Authorization": "Basic MfXR8cWWbk6XZAWhcTB6mTW0brJcmWsefQSgffYLDQkxHBT2gUT9wGoo" 
+ 					 },
 					data: {
 						// app_key: '1271687855',
 						// format: 'json',
@@ -48,6 +53,7 @@
 						// page: curPage
 					},
 					success: function(ret) {
+						console.log(ret)
 						if (ret.code == 200) {
 							callBack(ret.data);
 							curPage++;
