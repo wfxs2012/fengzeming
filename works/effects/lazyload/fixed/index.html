@@ -46,18 +46,14 @@
    						 "Authorization": "MfXR8cWWbk6XZAWhcTB6mTW0brJcmWsefQSgffYLDQkxHBT2gUT9wGoo" 
  					 },
 					data: {
-						// app_key: '1271687855',
-						// format: 'json',
-						// size: 'img',
-						// num: perPageCount,
-						// page: curPage
+						
 					},
 					success: function(ret) {
 						console.log(ret)
-						//if (ret.code == 200) {
-							callBack(ret.data);
+						
+							callBack(ret.photos);
 							curPage++;
-						//}
+						
 					}
 				})
 			}
