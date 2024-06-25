@@ -63,8 +63,8 @@
 				for (var i = 0; i < items.length; i++) {
 					tpl += '<li class="item">';
 					tpl += ' <a href="#" class="link"><img src="' + items[i].src.medium + '" alt="'+items[i].alt+'"></a>';
-					tpl += ' <h4 class="header">' + items[i].id + '</h4>';
-					tpl += '<p class="desp">' + items[i].photographer + '</p>';
+					tpl += ' <h4 class="header">ID: ' + items[i].id + '</h4>';
+					tpl += '<p class="desp">' + items[i].alt + '</p>';
 					tpl += '</li>';
 				}
 				$nodes = $(tpl);
